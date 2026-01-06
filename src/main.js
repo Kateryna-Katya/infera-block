@@ -125,18 +125,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         form.onsubmit = (e) => {
-            e.preventDefault();
-            if (parseInt(captchaInput.value) !== correctAnswer) {
-                alert('Капча решена неверно!');
-                return;
-            }
-            const btn = form.querySelector('button');
-            btn.disabled = true;
-            btn.innerHTML = 'Отправка...';
-            setTimeout(() => {
-                successMessage.classList.add('is-active');
-            }, 1000);
-        };
+          e.preventDefault();
+
+          // Проверка капчи на английском
+          if (parseInt(captchaInput.value) !== correctAnswer) {
+              alert('Incorrect CAPTCHA answer. Please try again.');
+              return;
+          }
+
+          const btn = form.querySelector('button');
+          btn.disabled = true;
+
+          // Изменение текста кнопки при отправке
+          btn.innerHTML = 'Sending...';
+
+          setTimeout(() => {
+              // Показ сообщения об успехе (которое мы уже перевели в HTML)
+              successMessage.classList.add('is-active');
+          }, 1000);
+      };
     };
     initForm();
 
